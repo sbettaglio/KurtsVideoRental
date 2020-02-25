@@ -8,15 +8,19 @@ namespace KurtsVideoRental
     static void Main(string[] args)
     {
       var tracker = new MovieTracker();
-      Console.WriteLine("Do you want to add a new movie? y/n");
+      Console.WriteLine("Welcome to Kurt's Video Rental!");
+      Console.WriteLine("Do you want to add a move (A), lookup the stats (L) or update a movie (U)?");
       var addNewMovie = Console.ReadLine().ToLower();
-      while (addNewMovie != "y" && addNewMovie != "n")
+      //Validation
+      while (addNewMovie != "a" && addNewMovie != "l" && addNewMovie != "u")
       {
-        Console.WriteLine("Invalid input. Please select (Y) or (N)");
+        Console.WriteLine("Invalid input. Please select (A), (L) or (U) ");
         addNewMovie = Console.ReadLine().ToLower();
       }
-      if (addNewMovie == "y")
+      //If user select add
+      if (addNewMovie == "a")
       {
+        //input all items for list
         Console.WriteLine("What is the name of the movie?");
         var name = Console.ReadLine();
         Console.WriteLine("What's the tagline?");
@@ -33,7 +37,14 @@ namespace KurtsVideoRental
         var cost = double.Parse(Console.ReadLine());
         Console.WriteLine("What was the budget?");
         var budget = double.Parse(Console.ReadLine());
+        //runs move adding method
         tracker.AddNewMovie(name, tagline, releasedDate, screenings, pricePerTicket, totalRevenue, cost, budget);
+      }
+      else if (addNewMovie == "l")
+      {
+        Console.WriteLine("What is the name of the movie you want to lookup?");
+        var name = Console.ReadLine().ToLower();
+        tracker.MovieLookUp(name);
       }
 
 
